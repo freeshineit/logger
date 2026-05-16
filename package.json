@@ -47,7 +47,7 @@
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "pretty-quick": "^4.2.2",
-    "@skax/rollup-config": "^1.0.6",
+    "@skax/rollup-config": "^1.0.8",
     "@types/jest": "^29.5.11",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.4",
@@ -74,5 +74,5 @@
   "bugs": {
     "url": "https://github.com/freeshineit/logger/issues"
   },
-  "homepage": "https://github.com/freeshineit/logger#readme"
+  "homepage": "https://freeshineit.github.io/logger/"
 }
