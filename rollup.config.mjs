@@ -5,6 +5,5 @@ const pkg = JSON.parse(fs.readFileSync("./package.json", "utf-8"));
 
 export default generateConfig({
   ...pkg,
-  dropConsole: false,
   port: 4000,
 });
