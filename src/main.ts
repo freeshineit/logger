@@ -5,8 +5,8 @@ import { Logger } from ".";
  * ```js
  * <script src="./node_modules/@skax/logger"></script>
  * <script>
- *   const logger = new Logger();
- *   logger.log("Hello, world!");
+ *   const logger = new Logger("Logger", 4);
+ *   logger.info("Hello, world!");
  * </script>
  * ```
  */
