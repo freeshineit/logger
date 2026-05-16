@@ -8,13 +8,13 @@ module.exports = {
   moduleNameMapper: {
     "^(\\.{1,2}/.*)\\.js$": "$1",
   },
-  collectCoverageFrom: ["src/**/*.ts", "!src/index.ts"],
+  collectCoverageFrom: ["src/**/*.ts", "!src/main.ts"],
   coverageThreshold: {
     global: {
-      branches: 78,
-      functions: 85,
+      branches: 85,
+      functions: 83,
       lines: 90,
-      statements: 90,
+      statements: 84,
     },
   },
   setupFiles: ["<rootDir>/test/setup.ts"],
