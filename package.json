@@ -39,9 +39,6 @@
     "typescript",
     "javascript"
   ],
-  "engines": {
-    "node": ">=16"
-  },
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^20.2.0",
