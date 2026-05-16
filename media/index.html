@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@skax/logger — Demo</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        background: #1a1a2e;
+        color: #e0e0e0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 24px 16px 48px;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+      header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ffffff;
+      }
+      header h1 span {
+        color: #7c5cfc;
+      }
+      header p {
+        font-size: 0.9rem;
+        color: #8888aa;
+        margin-top: 4px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 820px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .card {
+        background: #16213e;
+        border: 1px solid #2a2a4a;
+        border-radius: 12px;
+        padding: 22px 24px;
+      }
+      .card-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: #ccccff;
+        margin-bottom: 14px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .card-title::before {
+        content: "";
+        display: inline-block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #7c5cfc;
+      }
+
+      /* Level buttons */
+      .level-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .level-btn {
+        flex: 1;
+        min-width: 88px;
+        padding: 9px 12px;
+        border: 2px solid #2a2a4a;
+        border-radius: 8px;
+        background: transparent;
+        color: #aaaac8;
+        font-size: 0.84rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+        user-select: none;
+      }
+      .level-btn:hover {
+        border-color: #7c5cfc55;
+        color: #ccccff;
+      }
+      .level-btn.active {
+        border-color: #7c5cfc;
+        background: #7c5cfc18;
+        color: #fff;
+        box-shadow: 0 0 12px #7c5cfc30;
+      }
+      .level-btn[data-level="0"].active {
+        border-color: #666;
+        background: #66666618;
+        box-shadow: 0 0 12px #66666630;
+      }
+      .level-btn[data-level="1"].active {
+        border-color: #ff4d6a;
+        background: #ff4d6a18;
+        box-shadow: 0 0 12px #ff4d6a30;
+      }
+      .level-btn[data-level="2"].active {
+        border-color: #ffb347;
+        background: #ffb34718;
+        box-shadow: 0 0 12px #ffb34730;
+      }
+      .level-btn[data-level="3"].active {
+        border-color: #4da6ff;
+        background: #4da6ff18;
+        box-shadow: 0 0 12px #4da6ff30;
+      }
+      .level-btn[data-level="4"].active {
+        border-color: #5cdb5c;
+        background: #5cdb5c18;
+        box-shadow: 0 0 12px #5cdb5c30;
+      }
+
+      /* Action buttons */
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .btn {
+        padding: 8px 16px;
+        border: 1px solid #3a3a5a;
+        border-radius: 8px;
+        background: #1e2a4a;
+        color: #ccccee;
+        font-size: 0.83rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+      .btn:hover {
+        background: #2a3a5a;
+        border-color: #7c5cfc55;
+      }
+      .btn.clear {
+        border-color: #ff4d6a44;
+        color: #ff4d6a;
+      }
+      .btn.clear:hover {
+        background: #ff4d6a15;
+        border-color: #ff4d6a88;
+      }
+
+      /* Input row */
+      .input-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.83rem;
+        color: #aaaac8;
+      }
+      .input-row input {
+        background: #0d1117;
+        border: 1px solid #3a3a5a;
+        border-radius: 6px;
+        padding: 6px 10px;
+        color: #e0e0e0;
+        font-size: 0.83rem;
+        width: 140px;
+        outline: none;
+      }
+      .input-row input:focus {
+        border-color: #7c5cfc;
+      }
+
+      /* Console output */
+      .console {
+        background: #0d1117;
+        border: 1px solid #303040;
+        border-radius: 10px;
+        padding: 14px 16px;
+        min-height: 320px;
+        max-height: 480px;
+        overflow-y: auto;
+        font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+        font-size: 0.8rem;
+        line-height: 1.6;
+      }
+      .console .line {
+        display: flex;
+        gap: 8px;
+        padding: 2px 0;
+        border-bottom: 1px solid #ffffff05;
+      }
+      .console .line:last-child {
+        border-bottom: none;
+      }
+      .console .ts {
+        color: #555;
+        white-space: nowrap;
+        min-width: 78px;
+      }
+      .console .tag {
+        font-weight: 700;
+        white-space: nowrap;
+        min-width: 52px;
+      }
+      .console .tag.ERROR {
+        color: #ff4d6a;
+      }
+      .console .tag.WARN {
+        color: #ffb347;
+      }
+      .console .tag.INFO {
+        color: #4da6ff;
+      }
+      .console .tag.DEBUG {
+        color: #5cdb5c;
+      }
+      .console .tag.GROUP {
+        color: #7c5cfc;
+      }
+      .console .tag.END {
+        color: #666;
+      }
+      .console .msg {
+        color: #c9d1d9;
+        word-break: break-all;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 12px;
+        font-size: 0.73rem;
+        font-weight: 600;
+        background: #7c5cfc22;
+        color: #7c5cfc;
+        margin-left: 6px;
+      }
+
+      .hint {
+        margin-top: 10px;
+        font-size: 0.76rem;
+        color: #666;
+      }
+
+      footer {
+        margin-top: 28px;
+        text-align: center;
+        font-size: 0.76rem;
+        color: #555;
+      }
+      footer a {
+        color: #7c5cfc;
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      @media (max-width: 600px) {
+        .level-grid {
+          flex-direction: column;
+        }
+        .actions {
+          flex-direction: column;
+        }
+        .btn {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1><span>@skax</span>/logger</h1>
+      <p>Lightweight logger — level filtering · module prefix · caller-context output</p>
+    </header>
+
+    <div class="container">
+      <!-- Level Control -->
+      <div class="card">
+        <div class="card-title">Log Level <span class="badge" id="currentLevelBadge">WARN</span></div>
+        <div class="level-grid" id="levelGrid">
+          <button class="level-btn" data-level="0">NONE</button>
+          <button class="level-btn" data-level="1">ERROR</button>
+          <button class="level-btn active" data-level="2">WARN</button>
+          <button class="level-btn" data-level="3">INFO</button>
+          <button class="level-btn" data-level="4">DEBUG</button>
+        </div>
+        <div class="hint" id="levelDesc">
+          Current = <strong>WARN</strong> —
+          <span style="color: #ff4d6a">error</span>
+          + <span style="color: #ffb347">warn</span> are shown.
+        </div>
+      </div>
+
+      <!-- Prefix + Singleton -->
+      <div class="card">
+        <div class="card-title">Module Prefix</div>
+        <div class="input-row">
+          <label for="prefixInput">[</label>
+          <input id="prefixInput" type="text" value="Demo" maxlength="20" />
+          <label for="prefixInput">]</label>
+          <span style="font-size: 0.73rem; color: #555">— live update · try typing!</span>
+        </div>
+      </div>
+
+      <!-- Trigger Logs -->
+      <div class="card">
+        <div class="card-title">Trigger Logs</div>
+        <div class="actions">
+          <button class="btn" id="btnError" style="border-color: #ff4d6a44; color: #ff4d6a">.error()</button>
+          <button class="btn" id="btnWarn" style="border-color: #ffb34744; color: #ffb347">.warn()</button>
+          <button class="btn" id="btnInfo" style="border-color: #4da6ff44; color: #4da6ff">.info()</button>
+          <button class="btn" id="btnDebug" style="border-color: #5cdb5c44; color: #5cdb5c">.debug()</button>
+          <button class="btn" id="btnGroup">.group() / .groupEnd()</button>
+          <button class="btn" id="btnAll">Fire All 4</button>
+          <button class="btn clear" id="btnClear">Clear</button>
+        </div>
+      </div>
+
+      <!-- Console Output -->
+      <div class="card">
+        <div class="card-title">
+          Output <span class="badge" id="outputCount">0</span>
+          <span style="margin-left: 8px; font-size: 0.73rem; color: #555" id="sourceLabel">(inline Logger)</span>
+        </div>
+        <div class="console" id="consoleOutput">
+          <div style="color: #555; font-style: italic">Click a button to trigger log output…</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      @skax/logger — MIT —
+      <a href="https://github.com/freeshineit/logger" target="_blank" rel="noopener">GitHub</a>
+    </footer>
+
+    <script src="./index.umd.js"></script>
+
+    <script>
+      // ================================================================
+      //  Demo Application
+      // ================================================================
+      (function () {
+        var Logger = window.Logger;
+        var LEVEL = Logger.LEVEL;
+
+        var levelNames = ["NONE", "ERROR", "WARN", "INFO", "DEBUG"];
+
+        // ---- Create loggers ----
+        var logger = new Logger("Demo", LEVEL.WARN);
+        var apiLogger = new Logger("API", LEVEL.INFO);
+
+        // ---- DOM refs ----
+        var consoleOutput = document.getElementById("consoleOutput");
+        var outputCount = document.getElementById("outputCount");
+        var currentLevelBadge = document.getElementById("currentLevelBadge");
+        var levelDesc = document.getElementById("levelDesc");
+        var levelBtns = document.querySelectorAll(".level-btn");
+        var prefixInput = document.getElementById("prefixInput");
+
+        var logCount = 0;
+        var firstLog = true;
+
+        // ---- Save original console methods ----
+        var _console = {};
+        ["error", "warn", "info", "debug", "log", "group", "groupEnd"].forEach(function (m) {
+          _console[m] = console[m].bind(console);
+        });
+
+        function escapeHtml(s) {
+          var el = document.createElement("span");
+          el.textContent = s;
+          return el.innerHTML;
+        }
+
+        function addLine(level, args) {
+          if (firstLog) {
+            consoleOutput.innerHTML = "";
+            firstLog = false;
+          }
+          var ts = new Date().toLocaleTimeString("en-US", {
+            hour12: false,
+          });
+          var cls = level.toUpperCase();
+          var text = Array.prototype.map
+            .call(args, function (a) {
+              try {
+                return typeof a === "object" ? JSON.stringify(a) : String(a);
+              } catch (e) {
+                return String(a);
+              }
+            })
+            .join(" ");
+
+          var div = document.createElement("div");
+          div.className = "line";
+          div.innerHTML = '<span class="ts">' + ts + '</span><span class="tag ' + cls + '">[' + cls + ']</span><span class="msg">' + escapeHtml(text) + "</span>";
+          consoleOutput.appendChild(div);
+          consoleOutput.scrollTop = consoleOutput.scrollHeight;
+          logCount++;
+          outputCount.textContent = logCount;
+        }
+
+        // ---- Hook console to mirror in UI ----
+        ["error", "warn", "info", "debug"].forEach(function (lvl) {
+          console[lvl] = function () {
+            addLine(lvl.toUpperCase(), arguments);
+            _console[lvl].apply(console, arguments);
+          };
+        });
+        console.log = function () {
+          addLine("INFO", arguments);
+          _console.log.apply(console, arguments);
+        };
+        console.group = function () {
+          addLine("GROUP", arguments);
+          _console.group.apply(console, arguments);
+        };
+        console.groupEnd = function () {
+          addLine("END", ["— end —"]);
+          _console.groupEnd.apply(console, arguments);
+        };
+
+        // ---- Rebuild loggers when prefix changes ----
+        function rebuildLoggers() {
+          var prefix = prefixInput.value.trim() || "Logger";
+          var lvl = logger.getLevel();
+          var apiLvl = apiLogger.getLevel();
+          logger = new Logger(prefix, lvl);
+          apiLogger = new Logger(prefix + ".API", apiLvl);
+        }
+
+        prefixInput.addEventListener("input", function () {
+          rebuildLoggers();
+          addLine("INFO", ["Prefix → [" + (prefixInput.value.trim() || "Logger") + "]"]);
+        });
+
+        // ---- Level switching ----
+        function updateLevelUI(lvl) {
+          levelBtns.forEach(function (btn) {
+            var btnLvl = parseInt(btn.getAttribute("data-level"), 10);
+            if (btnLvl === lvl) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          });
+          var name = levelNames[lvl];
+          currentLevelBadge.textContent = name;
+
+          var parts = [];
+          if (lvl >= 1) parts.push('<span style="color:#ff4d6a">error</span>');
+          if (lvl >= 2) parts.push('<span style="color:#ffb347">warn</span>');
+          if (lvl >= 3) parts.push('<span style="color:#4da6ff">info</span>');
+          if (lvl >= 4) parts.push('<span style="color:#5cdb5c">debug</span>');
+
+          levelDesc.innerHTML = lvl === 0 ? "Current = <strong>NONE</strong> — all logs suppressed." : "Current = <strong>" + name + "</strong> — " + parts.join(" + ") + " are shown.";
+        }
+
+        levelBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var lvl = parseInt(btn.getAttribute("data-level"), 10);
+            logger.setLevel(lvl);
+            apiLogger.setLevel(lvl);
+            updateLevelUI(lvl);
+            addLine("INFO", ["setLevel(" + levelNames[lvl] + ") — " + (lvl === 0 ? "all suppressed" : levelNames.slice(1, lvl + 1).join("/") + " enabled")]);
+          });
+        });
+
+        // ---- Action buttons ----
+        document.getElementById("btnError").addEventListener("click", function () {
+          logger.error("Connection failed", {
+            code: 500,
+            reason: "timeout",
+          });
+        });
+
+        document.getElementById("btnWarn").addEventListener("click", function () {
+          logger.warn("Deprecated endpoint called", {
+            path: "/v1/old",
+            migrate: "/v2/new",
+          });
+        });
+
+        document.getElementById("btnInfo").addEventListener("click", function () {
+          logger.info("Server started", {
+            port: 3000,
+            env: "development",
+          });
+          apiLogger.info("GET /api/users", {
+            status: 200,
+            duration: "42ms",
+          });
+        });
+
+        document.getElementById("btnDebug").addEventListener("click", function () {
+          logger.debug("Request payload", {
+            method: "POST",
+            url: "/api/data",
+            body: { id: 1, name: "test" },
+          });
+        });
+
+        document.getElementById("btnGroup").addEventListener("click", function () {
+          logger.group("Batch Processing #42");
+          logger.debug("Step 1/4 — validate input");
+          logger.debug("Step 2/4 — transform data");
+          logger.info("Step 3/4 — write to DB");
+          logger.debug("Step 4/4 — invalidate cache");
+          logger.groupEnd();
+        });
+
+        document.getElementById("btnAll").addEventListener("click", function () {
+          logger.debug("Debug-level message");
+          logger.info("Info-level message");
+          logger.warn("Warn-level message");
+          logger.error("Error-level message");
+        });
+
+        document.getElementById("btnClear").addEventListener("click", function () {
+          consoleOutput.innerHTML = '<div style="color:#555;font-style:italic;">Click a button to trigger log output…</div>';
+          firstLog = true;
+          logCount = 0;
+          outputCount.textContent = "0";
+        });
+
+        // ---- Init ----
+        updateLevelUI(LEVEL.WARN);
+        console.log("%c@skax/logger Demo %c🚀", "font-size:1.1em;color:#7c5cfc;font-weight:bold;", "");
+        addLine("INFO", ["Demo ready — click the buttons to explore!"]);
+      })();
+    </script>
+  </body>
+</html>
