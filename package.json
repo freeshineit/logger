@@ -1,6 +1,6 @@
 {
   "name": "@skax/logger",
-  "version": "0.1.0-beta.1",
+  "version": "2.0.0-beta.1",
   "description": "A lightweight logger with level filtering, module prefix, and caller-context output.",
   "main": "dist/index.cjs",
   "module": "dist/index.esm.js",
@@ -41,6 +41,7 @@
     "typescript",
     "javascript"
   ],
+  "author": "ShineShao <xiaoshaoqq@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "@commitlint/cli": "^20.2.0",
@@ -65,5 +66,13 @@
     "typedoc-plugin-rename-defaults": "^0.7.3",
     "typedoc-plugin-replace-text": "^4.2.0",
     "typescript": "^5.9.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freeshineit/logger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/freeshineit/logger/issues"
+  },
+  "homepage": "https://github.com/freeshineit/logger#readme"
 }
