@@ -42,10 +42,10 @@ logger.error("Connection failed", new Error("timeout"));
 
 Creates a new logger instance.
 
-| Parameter | Type | Default | Description |
-|-----------|------|---------|-------------|
-| `prefix` | `string` | `"Logger"` | Module name shown in `[brackets]` |
-| `level` | `Level` | `Logger.LEVEL.WARN` | Minimum log level to output |
+| Parameter | Type     | Default             | Description                       |
+| --------- | -------- | ------------------- | --------------------------------- |
+| `prefix`  | `string` | `"Logger"`          | Module name shown in `[brackets]` |
+| `level`   | `Level`  | `Logger.LEVEL.WARN` | Minimum log level to output       |
 
 <br/>
 
@@ -57,23 +57,23 @@ const logger = new Logger("API", Logger.LEVEL.INFO);
 
 Accessible via `Logger.LEVEL`:
 
-| Constant | Value | Description |
-|----------|-------|-------------|
-| `Logger.LEVEL.NONE` | `0` | Suppress all output |
-| `Logger.LEVEL.ERROR` | `1` | Only errors |
-| `Logger.LEVEL.WARN` | `2` | Warnings and errors |
-| `Logger.LEVEL.INFO` | `3` | Info, warnings, errors |
-| `Logger.LEVEL.DEBUG` | `4` | All messages (including debug) |
+| Constant             | Value | Description                    |
+| -------------------- | ----- | ------------------------------ |
+| `Logger.LEVEL.NONE`  | `0`   | Suppress all output            |
+| `Logger.LEVEL.ERROR` | `1`   | Only errors                    |
+| `Logger.LEVEL.WARN`  | `2`   | Warnings and errors            |
+| `Logger.LEVEL.INFO`  | `3`   | Info, warnings, errors         |
+| `Logger.LEVEL.DEBUG` | `4`   | All messages (including debug) |
 
 ### Methods
 
 ```ts
-logger.error(...args);   // Always output (unless level = NONE)
-logger.warn(...args);    // Output when level ≥ WARN
-logger.info(...args);    // Output when level ≥ INFO
-logger.debug(...args);   // Output when level ≥ DEBUG
-logger.group(label);     // console.group when level ≥ DEBUG
-logger.groupEnd();       // console.groupEnd when level ≥ DEBUG
+logger.error(...args); // Always output (unless level = NONE)
+logger.warn(...args); // Output when level ≥ WARN
+logger.info(...args); // Output when level ≥ INFO
+logger.debug(...args); // Output when level ≥ DEBUG
+logger.group(label); // console.group when level ≥ DEBUG
+logger.groupEnd(); // console.groupEnd when level ≥ DEBUG
 ```
 
 ### `setLevel(level)` / `getLevel()`
@@ -81,10 +81,10 @@ logger.groupEnd();       // console.groupEnd when level ≥ DEBUG
 Change or read the log level at runtime:
 
 ```ts
-logger.setLevel(Logger.LEVEL.DEBUG);  // enable all logs
-logger.setLevel(Logger.LEVEL.NONE);   // silence everything
+logger.setLevel(Logger.LEVEL.DEBUG); // enable all logs
+logger.setLevel(Logger.LEVEL.NONE); // silence everything
 
-console.log(logger.getLevel());       // 0
+console.log(logger.getLevel()); // 0
 ```
 
 ### `getLogger(debug?)`
@@ -94,8 +94,8 @@ Returns a global singleton logger with prefix `"Logger"`:
 ```ts
 import { getLogger } from "@skax/logger";
 
-const log = getLogger(true);  // DEBUG level
-log.info("App initialized");   // → [Logger] [INFO] App initialized
+const log = getLogger(true); // DEBUG level
+log.info("App initialized"); // → [Logger] [INFO] App initialized
 ```
 
 The singleton is lazily created on first call — subsequent calls return the same instance.

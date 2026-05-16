@@ -42,10 +42,10 @@ logger.error("连接失败", new Error("超时"));
 
 创建一个 logger 实例。
 
-| 参数 | 类型 | 默认值 | 说明 |
-|-----------|------|---------|-------------|
-| `prefix` | `string` | `"Logger"` | 模块名称，显示在 `[方括号]` 中 |
-| `level` | `Level` | `Logger.LEVEL.WARN` | 最低输出级别 |
+| 参数     | 类型     | 默认值              | 说明                           |
+| -------- | -------- | ------------------- | ------------------------------ |
+| `prefix` | `string` | `"Logger"`          | 模块名称，显示在 `[方括号]` 中 |
+| `level`  | `Level`  | `Logger.LEVEL.WARN` | 最低输出级别                   |
 
 ```ts
 const logger = new Logger("API", Logger.LEVEL.INFO);
@@ -55,23 +55,23 @@ const logger = new Logger("API", Logger.LEVEL.INFO);
 
 通过 `Logger.LEVEL` 访问：
 
-| 常量 | 值 | 说明 |
-|----------|-------|-------------|
-| `Logger.LEVEL.NONE` | `0` | 关闭所有日志 |
-| `Logger.LEVEL.ERROR` | `1` | 仅输出 error |
-| `Logger.LEVEL.WARN` | `2` | 输出 warn 及 error |
-| `Logger.LEVEL.INFO` | `3` | 输出 info、warn、error |
+| 常量                 | 值  | 说明                     |
+| -------------------- | --- | ------------------------ |
+| `Logger.LEVEL.NONE`  | `0` | 关闭所有日志             |
+| `Logger.LEVEL.ERROR` | `1` | 仅输出 error             |
+| `Logger.LEVEL.WARN`  | `2` | 输出 warn 及 error       |
+| `Logger.LEVEL.INFO`  | `3` | 输出 info、warn、error   |
 | `Logger.LEVEL.DEBUG` | `4` | 输出所有日志（含 debug） |
 
 ### 日志方法
 
 ```ts
-logger.error(...args);   // 始终输出（除非 level = NONE）
-logger.warn(...args);    // level ≥ WARN 时输出
-logger.info(...args);    // level ≥ INFO 时输出
-logger.debug(...args);   // level ≥ DEBUG 时输出
-logger.group(label);     // level ≥ DEBUG 时调用 console.group
-logger.groupEnd();       // level ≥ DEBUG 时调用 console.groupEnd
+logger.error(...args); // 始终输出（除非 level = NONE）
+logger.warn(...args); // level ≥ WARN 时输出
+logger.info(...args); // level ≥ INFO 时输出
+logger.debug(...args); // level ≥ DEBUG 时输出
+logger.group(label); // level ≥ DEBUG 时调用 console.group
+logger.groupEnd(); // level ≥ DEBUG 时调用 console.groupEnd
 ```
 
 ### `setLevel(level)` / `getLevel()`
@@ -79,10 +79,10 @@ logger.groupEnd();       // level ≥ DEBUG 时调用 console.groupEnd
 运行时修改或读取日志级别：
 
 ```ts
-logger.setLevel(Logger.LEVEL.DEBUG);  // 开启所有日志
-logger.setLevel(Logger.LEVEL.NONE);   // 关闭所有日志
+logger.setLevel(Logger.LEVEL.DEBUG); // 开启所有日志
+logger.setLevel(Logger.LEVEL.NONE); // 关闭所有日志
 
-console.log(logger.getLevel());       // 0
+console.log(logger.getLevel()); // 0
 ```
 
 ### `getLogger(debug?)`
@@ -92,8 +92,8 @@ console.log(logger.getLevel());       // 0
 ```ts
 import { getLogger } from "@skax/logger";
 
-const log = getLogger(true);   // DEBUG 级别
-log.info("应用已初始化");        // → [Logger] [INFO] 应用已初始化
+const log = getLogger(true); // DEBUG 级别
+log.info("应用已初始化"); // → [Logger] [INFO] 应用已初始化
 ```
 
 单例在首次调用时惰性创建——后续调用返回同一实例。
