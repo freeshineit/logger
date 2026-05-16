@@ -12,8 +12,8 @@ devDependencies:
     specifier: ^20.2.0
     version: 20.5.3
   '@skax/rollup-config':
-    specifier: ^1.0.5
-    version: 1.0.5(eslint@9.39.4)(tslib@2.8.1)
+    specifier: ^1.0.6-beta.3
+    version: 1.0.6-beta.3(eslint@9.39.4)(tslib@2.8.1)
   '@types/jest':
     specifier: ^29.5.11
     version: 29.5.14
@@ -2178,6 +2178,21 @@ packages:
       rollup: 4.60.3
     dev: true
 
+  /@rollup/plugin-strip@3.0.4(rollup@4.60.3):
+    resolution: {integrity: sha512-LDRV49ZaavxUo2YoKKMQjCxzCxugu1rCPQa0lDYBOWLj6vtzBMr8DcoJjsmg+s450RbKbe3qI9ZLaSO+O1oNbg==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@rollup/pluginutils': 5.3.0(rollup@4.60.3)
+      estree-walker: 2.0.2
+      magic-string: 0.30.21
+      rollup: 4.60.3
+    dev: true
+
   /@rollup/plugin-swc@0.4.0(@swc/core@1.15.33)(rollup@4.60.3):
     resolution: {integrity: sha512-oAtqXa8rOl7BOK1Rz3rRxI+LIL53S9SqO2KSq2UUUzWgOgXg6492Jh5mL2mv/f9cpit8zFWdwILuVeozZ0C8mg==}
     engines: {node: '>=14.0.0'}
@@ -2512,8 +2527,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /@skax/rollup-config@1.0.5(eslint@9.39.4)(tslib@2.8.1):
-    resolution: {integrity: sha512-kSz4G1Y+GCtbsoGbFxXimDtd9xgPa6HFTpsasSrV/mHyiWlb3IGzfRxmmXfv9WPqJGor8LreYzrsLtGUeker5Q==}
+  /@skax/rollup-config@1.0.6-beta.3(eslint@9.39.4)(tslib@2.8.1):
+    resolution: {integrity: sha512-2ai9B3TJdvfS/N4Tgdvr+zTB+a3hHofaMMtpbaLB8m+qY1MsnACHKxcJUL9PN4A0OvfExuzR4yaKRxgtBdoVqg==}
     engines: {node: '>=16'}
     dependencies:
       '@babel/core': 7.29.0
@@ -2524,6 +2539,7 @@ packages:
       '@rollup/plugin-eslint': 9.2.0(eslint@9.39.4)(rollup@4.60.3)
       '@rollup/plugin-node-resolve': 16.0.3(rollup@4.60.3)
       '@rollup/plugin-replace': 6.0.3(rollup@4.60.3)
+      '@rollup/plugin-strip': 3.0.4(rollup@4.60.3)
       '@rollup/plugin-swc': 0.4.0(@swc/core@1.15.33)(rollup@4.60.3)
       '@rollup/plugin-terser': 0.4.4(rollup@4.60.3)
       '@rollup/plugin-typescript': 12.3.0(rollup@4.60.3)(tslib@2.8.1)(typescript@5.9.3)

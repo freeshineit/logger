@@ -1,6 +1,6 @@
 {
   "name": "@skax/logger",
-  "version": "2.0.0-beta.2",
+  "version": "2.0.0-beta.3",
   "description": "A lightweight logger with level filtering, module prefix, and caller-context output.",
   "main": "dist/index.cjs",
   "module": "dist/index.esm.js",
@@ -47,7 +47,7 @@
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "pretty-quick": "^4.2.2",
-    "@skax/rollup-config": "^1.0.5",
+    "@skax/rollup-config": "^1.0.6-beta.3",
     "@types/jest": "^29.5.11",
     "cross-env": "^10.1.0",
     "eslint": "^9.39.4",
