@@ -17,6 +17,12 @@ Uses `Proxy` + `Reflect` so DevTools source links point to the actual call site 
 
 ```bash
 npm install @skax/logger
+
+# or yarn
+yarn add @skax/logger
+
+# or pnpm
+pnpm add @skax/logger
 ```
 
 ## Quick Start
@@ -76,14 +82,20 @@ logger.group(label); // console.group when level ≥ DEBUG
 logger.groupEnd(); // console.groupEnd when level ≥ DEBUG
 ```
 
-### `setLevel(level)` / `getLevel()`
+### `setLevel(level)`
 
 Change or read the log level at runtime:
 
 ```ts
 logger.setLevel(Logger.LEVEL.DEBUG); // enable all logs
 logger.setLevel(Logger.LEVEL.NONE); // silence everything
+```
 
+### `getLevel()`
+
+Change or read the log level at runtime:
+
+```ts
 console.log(logger.getLevel()); // 0
 ```
 

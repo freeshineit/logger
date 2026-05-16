@@ -17,6 +17,12 @@
 
 ```bash
 npm install @skax/logger
+
+# or yarn
+yarn add @skax/logger
+
+# or pnpm
+pnpm add @skax/logger
 ```
 
 ## 快速开始
@@ -74,14 +80,20 @@ logger.group(label); // level ≥ DEBUG 时调用 console.group
 logger.groupEnd(); // level ≥ DEBUG 时调用 console.groupEnd
 ```
 
-### `setLevel(level)` / `getLevel()`
+### `setLevel(level)`
 
 运行时修改或读取日志级别：
 
 ```ts
 logger.setLevel(Logger.LEVEL.DEBUG); // 开启所有日志
 logger.setLevel(Logger.LEVEL.NONE); // 关闭所有日志
+```
 
+### `getLevel()`
+
+运行时修改或读取日志级别：
+
+```ts
 console.log(logger.getLevel()); // 0
 ```
 
