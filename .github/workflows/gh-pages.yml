@@ -25,10 +25,13 @@ jobs:
       # - name: Ensure target directory exists
       #   run: mkdir -p docs/media/style
 
-      - name: Copy JS to docs
+      - name: Copy js to docs/media
         run: cp public/demo.js docs/media/demo.js
 
-      - name: Copy CSS to docs
+      - name: Copy logger js to docs/media
+        run: cp dist/index.umd.js docs/media/index.umd.js
+
+      - name: Copy css to docs/media
         run: cp public/demo.css docs/media/demo.css
 
       - name: Deploy to gh-pages
