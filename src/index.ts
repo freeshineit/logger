@@ -359,7 +359,7 @@ let __$Default_Logger$__: Logger | null = null;
  * 惰性初始化：首次调用时创建实例，后续调用返回同一对象。
  * 前缀固定为 `"Logger"`。
  *
- * @param {boolean} [debug=false] - 是否开启 DEBUG 模式。`true` 时级别为 DEBUG，否则为 WARN
+ * @param {boolean} [debug=false] - 是否开启 DEBUG 模式。`true` 时级别为 `Logger.LEVEL.DEBUG`，否则为 `Logger.LEVEL.WARN`
  * @returns {Logger} 全局唯一的 Logger 实例
  *
  * @example
