@@ -159,7 +159,7 @@ class Logger {
 
           // 内部属性（_ 前缀）直接透传，不经过日志逻辑
           // Internal properties (_ prefix) pass through directly
-          if (typeof prop === "string" && prop.startsWith("_")) {
+          if (typeof prop === "string" && /^_/.test(prop)) {
             return value;
           }
 
