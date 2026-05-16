@@ -44,7 +44,7 @@ logger.error("连接失败", new Error("超时"));
 
 ## API
 
-### `new Logger(prefix?, level?)`
+### new Logger(prefix?, level?)
 
 创建一个 logger 实例。
 
@@ -71,16 +71,43 @@ const logger = new Logger("API", Logger.LEVEL.INFO);
 
 ### 日志方法
 
+#### error(...args)
+
 ```ts
 logger.error(...args); // 始终输出（除非 level = NONE）
-logger.warn(...args); // level ≥ WARN 时输出
-logger.info(...args); // level ≥ INFO 时输出
-logger.debug(...args); // level ≥ DEBUG 时输出
-logger.group(label); // level ≥ DEBUG 时调用 console.group
-logger.groupEnd(); // level ≥ DEBUG 时调用 console.groupEnd
 ```
 
-### `setLevel(level)`
+#### warn(...args)
+
+```ts
+logger.warn(...args); // level ≥ WARN 时输出
+```
+
+#### info(...args)
+
+```ts
+logger.info(...args); // level ≥ INFO 时输出
+```
+
+#### debug(...args)
+
+```ts
+logger.debug(...args); // level ≥ DEBUG 时输出
+```
+
+#### group(...args)
+
+```ts
+logger.group(...args); // level ≥ DEBUG 时调用 console.group
+```
+
+#### groupEnd(...args)
+
+```ts
+logger.groupEnd(...args); // level ≥ DEBUG 时调用 console.groupEnd
+```
+
+#### setLevel(level)
 
 运行时修改或读取日志级别：
 
@@ -89,7 +116,7 @@ logger.setLevel(Logger.LEVEL.DEBUG); // 开启所有日志
 logger.setLevel(Logger.LEVEL.NONE); // 关闭所有日志
 ```
 
-### `getLevel()`
+#### getLevel()
 
 运行时修改或读取日志级别：
 
@@ -97,7 +124,7 @@ logger.setLevel(Logger.LEVEL.NONE); // 关闭所有日志
 console.log(logger.getLevel()); // 0
 ```
 
-### `getLogger(debug?)`
+#### getLogger(debug?)
 
 返回全局单例 logger，前缀固定为 `"Logger"`：
 

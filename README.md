@@ -44,7 +44,7 @@ logger.error("Connection failed", new Error("timeout"));
 
 ## API
 
-### `new Logger(prefix?, level?)`
+### new Logger(prefix?, level?)
 
 Creates a new logger instance.
 
@@ -73,16 +73,43 @@ Accessible via `Logger.LEVEL`:
 
 ### Methods
 
+#### error(...args)
+
 ```ts
-logger.error(...args); // Always output (unless level = NONE)
-logger.warn(...args); // Output when level ≥ WARN
-logger.info(...args); // Output when level ≥ INFO
-logger.debug(...args); // Output when level ≥ DEBUG
-logger.group(label); // console.group when level ≥ DEBUG
-logger.groupEnd(); // console.groupEnd when level ≥ DEBUG
+logger.error(...args); // 始终输出（除非 level = NONE）
 ```
 
-### `setLevel(level)`
+#### warn(...args)
+
+```ts
+logger.warn(...args); // level ≥ WARN 时输出
+```
+
+#### info(...args)
+
+```ts
+logger.info(...args); // level ≥ INFO 时输出
+```
+
+#### debug(...args)
+
+```ts
+logger.debug(...args); // level ≥ DEBUG 时输出
+```
+
+#### group(...args)
+
+```ts
+logger.group(...args); // level ≥ DEBUG 时调用 console.group
+```
+
+#### groupEnd(...args)
+
+```ts
+logger.groupEnd(...args); // level ≥ DEBUG 时调用 console.groupEnd
+```
+
+#### setLevel(level)
 
 Change or read the log level at runtime:
 
@@ -91,7 +118,7 @@ logger.setLevel(Logger.LEVEL.DEBUG); // enable all logs
 logger.setLevel(Logger.LEVEL.NONE); // silence everything
 ```
 
-### `getLevel()`
+#### getLevel()
 
 Change or read the log level at runtime:
 
@@ -99,7 +126,7 @@ Change or read the log level at runtime:
 console.log(logger.getLevel()); // 0
 ```
 
-### `getLogger(debug?)`
+#### getLogger(debug?)
 
 Returns a global singleton logger with prefix `"Logger"`:
 
