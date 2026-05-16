@@ -12,8 +12,8 @@ devDependencies:
     specifier: ^20.2.0
     version: 20.5.3
   '@skax/rollup-config':
-    specifier: ^1.0.2
-    version: 1.0.4(eslint@9.39.4)(tslib@2.8.1)
+    specifier: ^1.0.5
+    version: 1.0.5(eslint@9.39.4)(tslib@2.8.1)
   '@types/jest':
     specifier: ^29.5.11
     version: 29.5.14
@@ -2206,7 +2206,7 @@ packages:
       rollup: 4.60.3
       serialize-javascript: 6.0.2
       smob: 1.6.1
-      terser: 5.46.2
+      terser: 5.47.1
     dev: true
 
   /@rollup/plugin-typescript@12.3.0(rollup@4.60.3)(tslib@2.8.1)(typescript@5.9.3):
@@ -2512,8 +2512,8 @@ packages:
     requiresBuild: true
     dev: true
 
-  /@skax/rollup-config@1.0.4(eslint@9.39.4)(tslib@2.8.1):
-    resolution: {integrity: sha512-gg4WM4QzUvjwW8d3LQ2DB+0y5YSfgOjQUdrw2axMMoLfMoHQJmCtKVV5hG1AjlEcyabxqFkldo/xdBrp2f79Zg==}
+  /@skax/rollup-config@1.0.5(eslint@9.39.4)(tslib@2.8.1):
+    resolution: {integrity: sha512-kSz4G1Y+GCtbsoGbFxXimDtd9xgPa6HFTpsasSrV/mHyiWlb3IGzfRxmmXfv9WPqJGor8LreYzrsLtGUeker5Q==}
     engines: {node: '>=16'}
     dependencies:
       '@babel/core': 7.29.0
@@ -2538,6 +2538,7 @@ packages:
       rollup-plugin-postcss: 4.0.2(postcss@8.5.14)
       rollup-plugin-serve: 2.0.3
       sass: 1.99.0
+      terser: 5.47.1
       typescript: 5.9.3
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -8538,8 +8539,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /terser@5.46.2:
-    resolution: {integrity: sha512-uxfo9fPcSgLDYob/w1FuL0c99MWiJDnv+5qXSQc5+Ki5NjVNsYi66INnMFBjf6uFz6OnX12piJQPF4IpjJTNTw==}
+  /terser@5.47.1:
+    resolution: {integrity: sha512-tPbLXTI6ohPASb/1YViL428oEHu6/qv1OxqYnfaonVCFHqx4+wCd95pHrQWsL5X4pl90CTyW9piSAsS2L0VoMw==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
