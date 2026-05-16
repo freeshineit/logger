@@ -35,7 +35,7 @@
  * @class
  * @example
  * ```ts
- * const logger = new Logger("HlsIO");
+ * const logger = new Logger("Logger");
  * logger.info("playlist loaded");
  * ```
  */
@@ -49,7 +49,6 @@ class Logger {
    * Every suppressed log method returns this function — calling it is a true no-op.
    *
    * @public
-   * @static
    */
   static NOOP = (): void => {};
 
@@ -59,16 +58,26 @@ class Logger {
    * 使用 `as const` 断言保留字面量类型，便于 TS 推导出联合类型
    * `0 | 1 | 2 | 3 | 4`，同时作为静态属性暴露供外部使用。
    *
-   * Log level constants.  Declared with `as const` so TypeScript
+   * | 常量 | 值 | 说明 |
+   * |------|----|------|
+   * | `Logger.LEVEL.NONE`  | `0` | 关闭所有日志 |
+   * | `Logger.LEVEL.ERROR` | `1` | 仅输出 error |
+   * | `Logger.LEVEL.WARN`  | `2` | 输出 warn 及更高级别 |
+   * | `Logger.LEVEL.INFO`  | `3` | 输出 info 及更高级别 |
+   * | `Logger.LEVEL.DEBUG` | `4` | 输出所有日志（含 debug） |
+   *
+   * Log level constants declared with `as const` so TypeScript
    * infers literal types, enabling the union `0 | 1 | 2 | 3 | 4`.
    *
+   * | Constant | Value | Description |
+   * |----------|-------|-------------|
+   * | `Logger.LEVEL.NONE`   | `0`   | Suppress all output |
+   * | `Logger.LEVEL.ERROR`  | `1`   | Only errors |
+   * | `Logger.LEVEL.WARN`   | `2`   | Warnings and above |
+   * | `Logger.LEVEL.INFO`   | `3`   | Info and above |
+   * | `Logger.LEVEL.DEBUG`  | `4`   | All messages (including debug) |
+   *
    * @public
-   * @static
-   * @property {0} NONE  - 关闭所有日志 / Suppress all output
-   * @property {1} ERROR - 仅输出 error / Only errors
-   * @property {2} WARN  - 输出 warn 及更高级别 / Warnings and above
-   * @property {3} INFO  - 输出 info 及更高级别 / Info and above
-   * @property {4} DEBUG - 输出所有日志（含 debug） / All messages
    */
   static LEVEL = {
     /** 关闭所有日志 */
@@ -109,7 +118,7 @@ class Logger {
    * @example
    * ```ts
    * // 默认 WARN 级别，只输出 error 和 warn
-   * const logger = new Logger("API");
+   * const logger = new Logger("Logger");
    *
    * // DEBUG 级别，输出所有日志
    * const debugLogger = new Logger("Debug", Logger.LEVEL.DEBUG);
@@ -213,7 +222,7 @@ class Logger {
    * @example
    * ```ts
    * if (logger.getLevel() === Logger.LEVEL.DEBUG) {
-   *   console.log("调试模式已开启");
+   *   logger.info("调试模式已开启");
    * }
    * ```
    */
@@ -241,7 +250,7 @@ class Logger {
    * @example
    * ```ts
    * logger.error("请求失败", { status: 500 });
-   * // → [Demo] [ERROR] 请求失败 { status: 500 }
+   * // → [Logger] [ERROR] 请求失败 { status: 500 }
    * ```
    */
   error(..._args: unknown[]): void {
@@ -258,7 +267,7 @@ class Logger {
    * @example
    * ```ts
    * logger.warn("配置项缺失，使用默认值", { key: "timeout" });
-   * // → [Demo] [WARN] 配置项缺失，使用默认值 { key: "timeout" }
+   * // → [Logger] [WARN] 配置项缺失，使用默认值 { key: "timeout" }
    * ```
    */
   warn(..._args: unknown[]): void {
@@ -275,7 +284,7 @@ class Logger {
    * @example
    * ```ts
    * logger.info("服务启动", { port: 3000 });
-   * // → [Demo] [INFO] 服务启动 { port: 3000 }
+   * // → [Logger] [INFO] 服务启动 { port: 3000 }
    * ```
    */
   info(..._args: unknown[]): void {
@@ -292,7 +301,7 @@ class Logger {
    * @example
    * ```ts
    * logger.debug("请求详情", { method: "POST", payload: { id: 1 } });
-   * // → [Demo] [DEBUG] 请求详情 { method: "POST", payload: { id: 1 } }
+   * // → [Logger] [DEBUG] 请求详情 { method: "POST", payload: { id: 1 } }
    * ```
    */
   debug(..._args: unknown[]): void {
