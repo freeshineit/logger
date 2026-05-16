@@ -45,6 +45,9 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0",
+    "pretty-quick": "^4.2.2",
     "@skax/rollup-config": "^1.0.2",
     "@types/jest": "^29.5.11",
     "cross-env": "^10.1.0",
