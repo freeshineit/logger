@@ -3,10 +3,10 @@ import { Logger } from ".";
  * umd input
  * @example
  * ```js
- * <script src="./node_modules/@skax/logger"></script>
+ * <script src="./node_modules/@skax/logger/dist/index.umd.js"></script>
  * <script>
- *   const logger = new Logger("Logger", 4);
- *   logger.info("Hello, world!");
+ *   const logger = new Logger("Browser", Logger.LEVEL.DEBUG);
+ *   logger.info("Hello from the browser!");
  * </script>
  * ```
  */
