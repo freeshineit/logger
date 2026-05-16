@@ -11,7 +11,9 @@
       "import": "./dist/index.esm.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.cjs"
-    }
+    },
+    "./dist/index.umd.js": "./dist/index.umd.js",
+    "./dist/index.umd": "./dist/index.umd.js"
   },
   "files": [
     "dist"
