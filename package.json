@@ -22,7 +22,6 @@
     "clean": "rimraf dist",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
-    "prepublishOnly": "npm run build",
     "lint": "eslint --fix \"./src/**/*.{ts,tsx,js,jsx,mjs,vue,cjs}\"",
     "lint:check": "eslint \"./src/**/*.{ts,tsx,js,jsx,mjs,vue,cjs}\"",
     "fmt": "prettier --write \"./**/*.{ts,tsx,js,jsx,mjs,json,md,yml,yaml,vue,cjs,css,scss,sass}\"",
