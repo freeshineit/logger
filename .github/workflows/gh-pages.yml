@@ -25,11 +25,11 @@ jobs:
       # - name: Ensure target directory exists
       #   run: mkdir -p docs/media/style
 
-      # - name: Copy JS to docs
-      #   run: cp dist/index.umd.js docs/media/index.umd.js
+      - name: Copy JS to docs
+        run: cp public/demo.js docs/media/demo.js
 
-      # - name: Copy CSS to docs
-      #   run: cp dist/style/css.css docs/media/style/css.css
+      - name: Copy CSS to docs
+        run: cp public/demo.css docs/media/demo.css
 
       - name: Deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
